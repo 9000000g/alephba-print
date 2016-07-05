@@ -1,0 +1,32 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-users nai-nav-icon nai-nav-title-icon"></i> گروه‌ها </h2>
+		<p> در این صفحه زیر لیست گروه‌بندی‌های مشتریان سیستم را مشاهده می‌کنید. </p>
+	</div>
+	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/main')"></div>
+	<div class="nai-nav-icon left glyphicon glyphicon-plus" ng-click="go('/groups/new')"></div>
+</div>
+
+<ul class="list-group">
+	<li class="list-group-item col-xs-12" ng-repeat="item in items" ng-click="go('/groups/{{item.id}}')">
+		<div class="col-xs-11">
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<label class="text-danger">نام گروه</label>
+				</div>
+				<div class="col-xs-9">
+					{{ item.name }}
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<label class="text-primary">تعداد مشتری</label>
+				</div>
+				<div class="col-xs-9">
+					{{ item.cnt }}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-1"> <span class="badge">GRP{{ item.id }}</span> </div>
+	</li>
+</ul>

@@ -1,0 +1,132 @@
+.nai-navbar{
+	z-index: 19999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 54px;
+	overflow: hidden;
+	background: #2196f3;
+	color: #fff;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+	.nai-navbar .title{
+		z-index: 1;
+		padding: 13px 15px;
+		text-align: right;
+		font-size: 16px;
+		float: right;
+		white-space: nowrap;
+		text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+	}
+	.nai-navbar .title *{
+		color: #fff;
+	}
+	.nai-nav-icon.right{
+		float: right;
+	}
+	.nai-nav-icon.left{
+		float: left;
+	}
+	.nai-nav-icon, .nai-nav-icon:hover{
+		z-index: 99999;
+		cursor: pointer;
+		width: 62px;
+		height: 100%;
+		font-size: 23px;
+		vertical-align: middle;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: rgba(0,0,0,0.07);
+		padding: 15px 0;
+		text-align: center;
+		border: none;
+		margin: 0;
+		color: #FFF;
+	}
+	.nai-nav-icon:active{
+		background-color: rgba(0,0,0,0.2);
+	}
+	
+	.nai-nav-icon[disabled]{
+		opacity: 0.7;
+	}
+
+
+.nai-view{
+	padding-top: 54px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	-webkit-transition-duration: 300ms;
+	transition-duration: 300ms;
+}
+
+.nai-page-container{
+	padding: 15px 0;
+}
+
+.nai-overlay {
+	z-index: 29999;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.25);
+}
+
+/* nai-sidebar */
+.nai-sidebar{
+	background: #FFFFFF;
+	padding: 0;
+	z-index: 30000;
+	position: fixed;
+	top: 0;
+	height: 100%;
+	overflow-y: auto;
+	left: 0;
+}
+
+
+
+.nai-sidebar .nav li{
+	border-radius: 0;
+}
+.nai-sidebar .nav li, .nai-sidebar .nav li:hover{
+	color: #1F8CE3;
+	font-size: 13px;
+	padding: 15px;
+	background: #FFF;
+}
+.nai-sidebar .nav li:active{
+	background-color: rgba(0,0,0,0.03);
+}
+.nai-sidebar .nav li.current{
+	background-color: rgba(0,0,0,0.07);
+}
+/* nai-searchbar */
+.nai-searchbar{
+	width: 100%;
+	height: 54px;
+	overflow: hidden;
+	background: #2196f3;
+	z-index: 30000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+}
+
+.nai-searchbar .form-control{
+	float: right;
+	width: calc( 100% - 140px );
+	margin: 8px;
+}
+	
+	
+	

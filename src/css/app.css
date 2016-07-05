@@ -1,0 +1,60 @@
+
+html, body{
+	font-family: Shabnam, Tahoma;
+}
+
+.nai-navbar .title{
+	padding-top: 9px;
+}
+.nai-navbar .title icon{
+	font-size: 11px;
+}
+.nai-navbar .title h2{
+	font-size: 18px;
+	margin: 0 0 3px 0;
+}
+.nai-navbar .title p{
+	font-size: 11px;
+}
+.nai-navbar .nai-nav-title-icon{
+    background-color: transparent;
+    padding: 0;
+    width: 39px;
+    font-size: 15px;
+}
+
+.list-group:not(.main){
+	line-height: 1.6;
+	font-size: 12px;
+}
+.list-group:not(.main) label:not(.control-label):after{
+	content: ': ';
+}
+.main .icon{
+	font-size: 16px;
+	vertical-align: middle;
+	margin-left: 6px;
+}
+.main .text{
+	font-size: 13px;
+}
+.main .icon, .main .text{
+	color: #3C3C3C;
+}
+
+.twopx-border{
+    border: solid 2px #eee;
+}
+.products-in-sale{
+	/* background: red; */
+}
+
+.recent-files li{
+	direction: ltr;
+	text-align: left;
+	
+}
+.recent-files li span{
+	font-family: Tahoma;
+	vertical-align: middle;
+}

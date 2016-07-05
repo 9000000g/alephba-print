@@ -1,0 +1,48 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-address-book nai-nav-icon nai-nav-title-icon"></i> فاکتور {{ id == 'new'? 'جدید': 'SAL'+item.id }} {{ id != 'new'? '(کد '+calcFactorCode()+')': ''}}</h2>
+		<p> شما در حال {{ id == 'new'? 'ایجاد فاکتور جدید': 'ویرایش فاکتور SAL'+item.id }} هستید. </p>
+	</div>
+	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/sales')"></div>
+	<div class="nai-nav-icon left glyphicon glyphicon-trash" ng-click="delete()" ng-if="id != 'new'"></div>
+	<button class="nai-nav-icon left glyphicon glyphicon-ok" ng-click="submit()"></button>
+	<div class="nai-nav-icon left glyphicon glyphicon-print" ng-click="print()"></div>
+</div>
+<div class="nai-page-container">
+	<div class="form-group col-sm-6">
+		<label class="control-label">مشتری</label>
+		<select class="form-control" selectize="{valueField:'id',labelField:'name'}" options="customers"  ng-model="item.customer"></select>
+	</div>
+	<div class="form-group col-sm-6">
+		<label class="control-label">تاریخ</label>
+		<!-- <select class="form-control" selectize="{valueField:'id',labelField:'name'}" options="customers"  ng-model="item.customer"></select> -->
+		<input class="form-control" ng-jalaali-flat-datepicker datepicker-config="datepickerConfig" ng-model="item.date">
+	</div>
+	<div class="form-group col-sm-12">
+		<label class="control-label">محصولات</label>
+		<div class="full-width row col-xs-offset-0">
+			<div class="full-width row" ng-repeat="product in item.products">
+				<div class="col-sm-5">
+					<select class="form-control" selectize="{valueField:'id',labelField:'name'}" options="products"  ng-model="product.id" placeholder="محصول"></select>
+				</div>
+				<div class="col-sm-5">
+					<input type="number" class="form-control" ng-model="product.cnt" placeholder="تعداد"/>
+					<label class="text-info">موجودی انبار: {{ calcTotalCnt(product.id) }}</label>
+				</div>
+				<div class="col-sm-2">
+					<button class="btn btn-link full-width btn-sm" ng-click="removeProduct($index)"> <i class="glyphicon glyphicon-trash"></i> حذف محصول </md-button>
+				</div>
+			</div>
+			<div class="full-width row">
+				<div class="col-sm-2 col-sm-offset-10">
+					<button class="btn btn-link full-width btn-sm" ng-click="addProduct()"> <i class="glyphicon glyphicon-plus"></i> اضافه کردن محصول </md-button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group col-sm-12">
+		<label class="control-label">توضیحات</label>
+		<textarea class="form-control" ng-model="item.description"></textarea>
+	</div>
+</div>
+

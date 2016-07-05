@@ -1,0 +1,65 @@
+{
+  "name": "alephba-print",
+  "description": "Alephba Print",
+  "version": "1.0.0",
+  "build": {
+    "appId": "alephba-print",
+    "app-category-type": "none",
+    "win": {
+      "title": "Alephba Print",
+      "version": "1.0.0",
+      "publisher": "nainemom",
+      "icon": "build/icon.ico",
+      "iconUrl": "https://github.com/favicon.ico",
+      "verbosity": 1
+    },
+    "mac": {
+      "title": "",
+      "background": "",
+      "icon": "",
+      "icon-size": "",
+      "contents": [
+        {
+          "x": 438,
+          "y": 364,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 192,
+          "y": 364,
+          "type": "file"
+        }
+      ]
+    },
+    "linux": {}
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron .",
+    "exe": "./node_modules/.bin/build --win --ia32 & ./node_modules/.bin/build --win --x64",
+    "deb": "./node_modules/.bin/build --linux deb tar.xz",
+    "dmg": "echo not tested yet"
+  },
+  "keywords": [
+    "app"
+  ],
+  "author": "Nainemom <nainemom@gmail.com>",
+  "contributors": [
+    {
+      "name": "Nainemom",
+      "email": "nainemom@gmail.com"
+    }
+  ],
+  "homepage": "http://github.com/nainemom",
+  "license": "GPL-3.0",
+  "devDependencies": {
+	"electron-prebuilt": "0.34.5",
+    "electron-builder": "5.10.5",    
+    "electron-rebuild": "1.1.4"
+  },
+  "dependencies": {
+    "nai-sql": "https://github.com/nainemom/nai-sql.git",
+    "socket.io": "^1.4.6"
+  }
+}

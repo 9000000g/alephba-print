@@ -1,0 +1,32 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-dollar nai-nav-icon nai-nav-title-icon"></i> قیمت‌ها </h2>
+		<p> در این صفحه زیر لیست کدهای قیمت محصولات سیستم را مشاهده می‌کنید. </p>
+	</div>
+	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/main')"></div>
+	<div class="nai-nav-icon left glyphicon glyphicon-plus" ng-click="go('/prices/new')"></div>
+</div>
+
+<ul class="list-group">
+	<li class="list-group-item col-xs-12" ng-repeat="item in items" ng-click="go('/prices/{{item.id}}')">
+		<div class="col-xs-11">
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<label class="text-danger">کد</label>
+				</div>
+				<div class="col-xs-9">
+					{{ item.code }}
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<label class="text-primary">قیمت</label>
+				</div>
+				<div class="col-xs-9">
+					{{ item.value }}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-1"> <span class="badge">PRC{{ item.id }}</span> </div>
+	</li>
+</ul>

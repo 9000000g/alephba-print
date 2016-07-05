@@ -1,0 +1,20 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-users nai-nav-icon nai-nav-title-icon"></i> گروه {{ id == 'new'? 'جدید': 'GRP'+item.id }} </h2>
+		<p> شما در حال {{ id == 'new'? 'ایجاد گروه جدید': 'ویرایش گروه GRP'+item.id }} هستید. </p>
+	</div>
+	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/groups')"></div>
+	<div class="nai-nav-icon left glyphicon glyphicon-trash" ng-click="delete()" ng-if="id != 'new'"></div>
+	<div class="nai-nav-icon left glyphicon glyphicon-ok" ng-click="submit()"></div>
+</div>
+<div class="nai-page-container">
+	<div class="form-group col-sm-12">
+		<label class="control-label">نام گروه</label>
+		<input type="text" class="form-control" ng-model="item.name"/>
+	</div>
+	<div class="form-group col-sm-12">
+		<label class="control-label">توضیحات</label>
+		<textarea class="form-control" ng-model="item.description"></textarea>
+	</div>
+</div>
+

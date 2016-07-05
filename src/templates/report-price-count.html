@@ -1,0 +1,24 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-money nai-nav-icon nai-nav-title-icon"></i> گزارش مجموع فروش</h2>
+		<p> محاسبه مجموع فروش بر اساس بازه انتخابی </p>
+	</div>
+	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/main')"></div>
+	<div class="nai-nav-icon left glyphicon glyphicon-remove" ng-click="searched = false" ng-show="searched"></div>
+	<button class="nai-nav-icon left glyphicon glyphicon-ok" ng-disabled="!item.from || !item.to || item.to < item.from" ng-click="calc()" ng-show="!searched"></button>
+</div>
+<div class="nai-page-container" ng-show="!searched">
+	<div class="form-group col-xs-6">
+		<label class="control-label">از فاکتور</label>
+		<select class="form-control" selectize="{valueField:'id',labelField:'code'}" options="sales"  ng-model="item.from"></select>
+	</div>
+	<div class="form-group col-xs-6">
+		<label class="control-label">تا فاکتور</label>
+		<select class="form-control" selectize="{valueField:'id',labelField:'code'}" options="sales"  ng-model="item.to"></select>
+	</div>
+</div>
+<div class="nai-page-container" ng-show="searched">
+	<h2 class="col-xs-12 text-info text-center">
+		{{ searchResult.price_count }} تومان
+	</h2>
+</div>

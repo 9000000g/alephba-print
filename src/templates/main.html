@@ -1,0 +1,36 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-{{$app.icon}} nai-nav-icon nai-nav-title-icon"></i> {{ $app.title }} </h2>
+		<p> {{ $app.description }} </p>
+	</div>
+	<button class="nai-nav-icon left glyphicon glyphicon-off" ng-click="exit()"></button>
+</div>
+<searchbar open="searchbar" placeholder="کد آیتم را وارد کنید"></searchbar>
+<div>
+	<ul class="list-group main">
+		<li class="list-group-item" ng-click="go('/customers')">
+			<i class="icon icon-address-book text-bg"></i>
+			<span class="text">مشتری</span>
+		</li>
+		<li class="list-group-item" ng-click="go('/groups')">
+			<i class="icon icon-users"></i>
+			<span class="text">گروه</span>
+		</li>
+		<li class="list-group-item" ng-click="go('/products')">
+			<i class="icon icon-list-alt"></i>
+			<span class="text">محصول</span>
+		</li>
+		<li class="list-group-item" ng-click="go('/prices')">
+			<i class="icon icon-dollar"></i>
+			<span class="text">قیمت</span>
+		</li>
+		<li class="list-group-item" ng-click="go('/sales')">
+			<i class="icon icon-basket"></i>
+			<span class="text">فروش</span>
+		</li>
+		<li class="list-group-item" ng-click="go('/report-price-count')">
+			<i class="icon icon-money"></i>
+			<span class="text">گزارش مجموع فروش</span>
+		</li>
+	</ul>
+</div>
