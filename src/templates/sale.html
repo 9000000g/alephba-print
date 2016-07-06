@@ -3,10 +3,10 @@
 		<h2> <i class="icon icon-address-book nai-nav-icon nai-nav-title-icon"></i> فاکتور {{ id == 'new'? 'جدید': 'SAL'+item.id }} {{ id != 'new'? '(کد '+calcFactorCode()+')': ''}}</h2>
 		<p> شما در حال {{ id == 'new'? 'ایجاد فاکتور جدید': 'ویرایش فاکتور SAL'+item.id }} هستید. </p>
 	</div>
-	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/sales')"></div>
-	<div class="nai-nav-icon left glyphicon glyphicon-trash" ng-click="delete()" ng-if="id != 'new'"></div>
+	<button class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/sales')"></button>
+	<button class="nai-nav-icon left glyphicon glyphicon-trash" ng-click="delete()" ng-if="id != 'new'"></button>
 	<button class="nai-nav-icon left glyphicon glyphicon-ok" ng-click="submit()"></button>
-	<div class="nai-nav-icon left glyphicon glyphicon-print" ng-click="print()"></div>
+	<button class="nai-nav-icon left glyphicon glyphicon-print" ng-disabled="item.id == 'new'" ng-click="print()"></button>
 </div>
 <div class="nai-page-container">
 	<div class="form-group col-sm-6">

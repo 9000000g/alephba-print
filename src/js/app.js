@@ -49,6 +49,10 @@ var app = angular.module('app', ['ngNaiFramework', 'app.services', 'app.controll
 		templateUrl: 'templates/sale.html',
 		controller: 'SaleCtrl'
 	})
+	.when('/print/:id', {
+		templateUrl: 'templates/print.html',
+		controller: 'PrintCtrl'
+	})
 	.when('/select', {
 		templateUrl: 'templates/select.html',
 		controller: 'SelectCtrl'

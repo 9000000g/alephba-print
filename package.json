@@ -37,7 +37,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron .",
-    "exe": "./node_modules/.bin/build --win --ia32 & ./node_modules/.bin/build --win --x64",
+    "exe": "./node_modules/.bin/build --win --ia32",
     "deb": "./node_modules/.bin/build --linux deb tar.xz",
     "dmg": "echo not tested yet"
   },
@@ -55,8 +55,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
 	"electron-prebuilt": "0.34.5",
-    "electron-builder": "5.10.5",    
-    "electron-rebuild": "1.1.4"
+    "electron-builder": "5.10.5"
   },
   "dependencies": {
     "nai-sql": "https://github.com/nainemom/nai-sql.git",

@@ -1,0 +1,12 @@
+
+html, body{
+	font-family: Shabnam, Tahoma;
+}
+.nai-navbar{
+	display: none;
+}
+
+.print{
+	border: none;
+	margin: 0;
+}

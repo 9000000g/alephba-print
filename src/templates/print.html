@@ -1,0 +1,60 @@
+<div class="nai-navbar">
+	<div class="title">
+		<h2> <i class="icon icon-{{$app.icon}} nai-nav-icon nai-nav-title-icon"></i> پرینت فاکتور {{item.customer_code}}</h2>
+		<p> قسمت‌های "جهت ارائه به" و آدرس‌ها" قابل ویرایش هستند. </p>
+	</div>
+	<button class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/sales/'+item.id)"></button>
+	<button class="nai-nav-icon left glyphicon glyphicon-ok" ng-click="submit()"></button>
+</div>
+<div class="print">
+	<header>
+		<span class="logo">
+			<img src="./images/logo.png"/>	
+		</span>
+		<span class="title">
+			<span class="text"> فاکتور تحویل کالا </span>
+		</span>
+		<span class="codes">
+			<div class="text"><span>کد اقتصادی: 411474936151</div>
+			<div class="text"><span>شماره فاکتور: {{item.code}}</div>
+			<div class="text"><span>جهت ارائه به: <input value="بانک"></div>
+	</span>
+	</header>
+	<div class="col-xs-12"> <br><br><br> </div>
+	<p class="col-xs-12"> در تاریخ {{item.date}} اقلام ذیل به بانک مهر اقتصاد شعبه <b>{{item.customer_name}} ({{item.customer_code}})</b> تحویل گردید.</p>
+	<div class="col-xs-12"> <br><br> </div>
+	<table class="table col-xs-10 col-xs-offset-1">
+		<tr>
+			<td>ردیف</td>
+			<td>شرح کالا</td>
+			<td>کد کالا</td>
+			<td>تعداد</td>
+			<td>قیمت جزء</td>
+			<td>قیمت کل</td>
+		</tr>
+		<tr ng-repeat="product in item.products">
+			<td> {{$index + 1 }} </td>
+			<td> {{product.name}} </td>
+			<td> {{product.id}} </td>
+			<td> {{product.cnt}} </td>
+			<td> {{product.price_value / product.cnt}} تومان </td>	
+			<td> {{product.price_value}} تومان </td>
+		</tr>
+		<tr class="last-child">
+			<td colspan="4" class="none"></td>
+			<td> جمع کل </td>
+			<td> {{ item.total_price_value }} تومان </td>
+		<tr>
+	</table>
+	<div class="col-xs-12"> <br><br> </div>
+	<div class="col-xs-10 col-xs-offset-1 sign">
+		<div class="col-xs-6">مهر و امضای تحویل گیرنده</div>
+		<div class="col-xs-6">مهر و امضای تحویل دهنده</div>
+	</div>
+	<div class="col-xs-12"> <br><br><br><br><br><br><br><br><br><br> </div>
+	<div class="col-xs-10 col-xs-offset-1 address">
+		<input class="address" value="آدرس: قم، مجتمع ناشران، طبقه زیرهمکف، واحد ۱۰ب">
+		<input class="phone" value="تلفن: ۰۲۵-۳۷۸۴۲۶۰۷">
+		<input class="fax" value="فکس: ۰۲۵-۳۷۸۴۲۶۰۷">
+	</div>
+</div>

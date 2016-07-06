@@ -260,16 +260,16 @@ angular.module('app.controllers', [])
 	$scope.id = $routeParams.id;
 	$scope.submit = function(){
 		$sales.set( $scope.item, function(){
-			$rootScope.go('sales', 'sales');
+			$rootScope.go('sales');
 		});
 	}
 	$scope.delete = function(){
 		$sales.del( $scope.item.id, function(){
-			$rootScope.go('sales', 'sales');
+			$rootScope.go('sales');
 		});
 	}
 	$scope.print = function(){
-		alert('i dont have printer yet');
+		$rootScope.go('print/'+$scope.item.id);
 	}
 	$scope.addProduct = function(){
 		$scope.item.products.push({});
@@ -277,6 +277,26 @@ angular.module('app.controllers', [])
 	$scope.removeProduct = function(index){
 		$scope.item.products.splice(index,1);
 	}
+})
+.controller('PrintCtrl', function($scope, $sales, $rootScope, $routeParams, $window){
+	$rootScope.loading = true;
+	$scope.item = {};
+
+	$sales.get($routeParams.id, function(item){
+		$scope.item = item;
+		$scope.item.code = item.date.split('-').join().substr(0,4) + item.id;
+		$scope.item.total_price_value = 0;
+		for( var i = 0; i < item.products.length; i++ ){
+			$scope.item.total_price_value += item.products[i].price_value;
+		}
+		$rootScope.loading = false;
+	});
+
+	$scope.submit = function(){
+		$window.print()
+	}
+
+
 })
 .controller('SelectCtrl', function($scope, $rootScope, localStorageService, $server){
 	$scope.recentFiles = localStorageService.get('recentFiles');

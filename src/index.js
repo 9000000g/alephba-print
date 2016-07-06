@@ -12,9 +12,7 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
 	mainWindow = new BrowserWindow({
-		width: 800,
-		weight: 600,
-		resizable: false,
+		resizable: true,
 		center: true,
 		titleBarStyle: 'hidden',
 		autoHideMenuBar: true,
@@ -505,7 +503,6 @@ io.on('connection', function(socket){
 					result[index].products = [];
 					setProducts( result[index] );
 				} );
-				
 				callback(false, result);
 			});
 		}

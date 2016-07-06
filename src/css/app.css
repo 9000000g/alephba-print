@@ -2,7 +2,6 @@
 html, body{
 	font-family: Shabnam, Tahoma;
 }
-
 .nai-navbar .title{
 	padding-top: 9px;
 }
@@ -55,6 +54,90 @@ html, body{
 	
 }
 .recent-files li span{
-	font-family: Tahoma;
 	vertical-align: middle;
+}
+
+
+.print{
+	background: #FFF;
+	margin: 30px;
+	padding: 15px;
+	border: dotted 2px #eee;
+	font-size: 12px;
+	min-width: 900px;
+	overflow: auto;
+}
+.print header{
+	height: 114px;
+	display: block;
+	overflow: hidden;
+}
+.print header > span{
+	height: 100%;
+	float: right;
+}
+.print header > span.logo{
+	width: 25%;
+}
+.print header > span.title{
+	width: 50%;
+	margin-top: 80px;
+	text-align: center;
+}
+.print header > span.codes{
+	width: 25%;
+	margin-top: 60px;
+}
+.print header > span.codes input{
+	display: inline;
+	width: auto;
+	margin: -10px;
+	padding-right: 12px;
+	border: none;
+}
+.print input{
+	border: none;
+	width: auto;
+}
+.print .address{
+	font-size: 12px;
+}
+.print .address input.address{
+	margin: 0;
+	width: 46%;
+	text-align: center;
+}
+.print .address input.phone,
+.print .address input.fax{
+	margin: 0;
+	width: 25%;
+	text-align: center;
+}
+.print header img{
+	max-width: 158px;
+	min-width: 100px;
+	width: 75%;
+}
+.print header .codes{
+	text-align: right;
+}
+
+.print table tr{
+	border-right: solid 1px #000;
+	border-bottom: solid 1px #000;
+}
+.print table tr td{
+	border-top: solid 1px #000;
+	border-left: solid 1px #000;
+}
+.print table tr.last-child{
+	border-right: 0;
+	border-bottom: 0;
+}
+.print table tr.last-child td:not(.none){
+	border-bottom: solid 1px #000;
+}
+.print .sign{
+	text-align: right;
+	font-size: 15px;
 }
