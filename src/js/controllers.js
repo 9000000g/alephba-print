@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 .run(function($rootScope, $location, $server, $app, $customers, $groups, $prices, $products, $sales){
 	$rootScope.$app = $app;
-	
+
 	$rootScope.panels = {};
 	$rootScope.go = function(url){
 		//$rootScope.panels.sidebar = false;
@@ -12,7 +12,7 @@ angular.module('app.controllers', [])
 		return true;
 	}
 	/* $rootScope.go( '/main' ); */
-	
+
 	$rootScope.alert = alert;
 	$rootScope.exit = function(){
 		$server.emit( 'exit' );
@@ -21,6 +21,19 @@ angular.module('app.controllers', [])
 		$server.emit('exit');
 	}
 	$rootScope.datepickerConfig = {dateFormat: 'jYYYY-jMM-jDD', allowFuture: true};
+	$rootScope.displayPrice = function(val){
+		val = typeof val == 'undefined'? 0: val;
+		var price = val.toString().split('').reverse().join('');
+		var output = '';
+		for( var i = 0; i < price.length; i+=3 ){
+			output+= price.substr(i, 3) + ( price.substr(i, 3).length == 3 ? ',': '');
+		}
+		output = output.split('').reverse().join('');
+		if( output.substr(0,1) == ',' ){
+			output = output.substr(1);
+		}
+		return output;
+	}
 
 })
 .controller('MainCtrl', function($scope, $server){
@@ -43,8 +56,8 @@ angular.module('app.controllers', [])
 	$groups.reload( function(items){
 		$scope.groups = items;
 	});
-	
-	
+
+
 	$scope.id = $routeParams.id;
 	$scope.submit = function(){
 		$customers.set( $scope.item, function(){
@@ -71,7 +84,7 @@ angular.module('app.controllers', [])
 			$scope.item = item;
 		});
 	}
-	
+
 	$scope.id = $routeParams.id;
 	$scope.submit = function(){
 		$groups.set( $scope.item, function(){
@@ -134,7 +147,7 @@ angular.module('app.controllers', [])
 			}
 		}
 	});
-	
+
 	$scope.id = $routeParams.id;
 
 	$scope.submit = function(){
@@ -150,12 +163,15 @@ angular.module('app.controllers', [])
 })
 .controller('ProductsCtrl', function($scope, $timeout, $server, $products){
 	$scope.items = [];
+	$scope.totalPrice = 0;
 	$scope.calcPrice = function(item){
 		return item.price_value * item.cnt;
 	}
 	$products.reload(function(items){
 		$scope.items = items;
-		console.log(items);
+		for( var i = 0; i < items.length; i++ ){
+			$scope.totalPrice+= $scope.calcPrice( items[i] );
+		}
 	});
 })
 .controller('ProductCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $products, $prices){
@@ -173,7 +189,7 @@ angular.module('app.controllers', [])
 	$prices.reload( function(items){
 		$scope.prices = items;
 	});
-	
+
 	$scope.calcPrice = function(){
 		for( var i = 0; i < $scope.prices.length; i++ ){
 			if( $scope.prices[i].id == $scope.item.price )
@@ -181,7 +197,7 @@ angular.module('app.controllers', [])
 		}
 		return 0;
 	}
-	
+
 	$scope.id = $routeParams.id;
 	$scope.submit = function(){
 		$products.set( $scope.item, function(){
@@ -224,13 +240,14 @@ angular.module('app.controllers', [])
 	});
 })
 .controller('SaleCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $sales, $products, $customers){
-	
-	
+
+
 	$scope.item = {};
 	if( $routeParams.id != 'new' ){
 		$rootScope.loading = true;
 		$sales.get($routeParams.id, function(item){
 			$scope.item = item;
+			console.log(item);
 			$rootScope.loading = false;
 		});
 	}
@@ -256,7 +273,7 @@ angular.module('app.controllers', [])
 	$scope.calcFactorCode = function(){
 		return $scope.item.id? $scope.item.date.split('-').join().substr(0,4) + $scope.item.id: '' ;
 	}
-	
+
 	$scope.id = $routeParams.id;
 	$scope.submit = function(){
 		$sales.set( $scope.item, function(){
@@ -287,7 +304,7 @@ angular.module('app.controllers', [])
 		$scope.item.code = item.date.split('-').join().substr(0,4) + item.id;
 		$scope.item.total_price_value = 0;
 		for( var i = 0; i < item.products.length; i++ ){
-			$scope.item.total_price_value += item.products[i].price_value;
+			$scope.item.total_price_value += (item.products[i].price_value * item.products[i].cnt);
 		}
 		$rootScope.loading = false;
 	});
@@ -302,7 +319,7 @@ angular.module('app.controllers', [])
 	$scope.recentFiles = localStorageService.get('recentFiles');
 	$scope.recentFiles = $scope.recentFiles? $scope.recentFiles: [];
 	$scope.selectedFile = '';
-	
+
 	$scope.selectFile = function(file){
 		file = typeof file == 'undefined'? null: file;
 		$server.emit('selectFile', {
@@ -341,7 +358,7 @@ angular.module('app.controllers', [])
 		$scope.recentFiles.splice( index, 1 );
 		localStorageService.set('recentFiles', $scope.recentFiles);
 	}
-	
+
 })
 .controller('ReportPriceCountCtrl', function($scope, $sales){
 	$scope.item = {};

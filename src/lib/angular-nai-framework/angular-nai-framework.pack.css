@@ -42,7 +42,7 @@ a:hover, a:focus{
 }
 
 .glyphicon{
-	vertical-align: middle;
+	/*vertical-align: middle;*/
 }
 .navbar .navbar-left{
 	float: left;
@@ -1151,7 +1151,7 @@ html{direction:rtl}body{direction:rtl}.list-unstyled{padding-right:0;padding-lef
 		width: 62px;
 		height: 100%;
 		font-size: 23px;
-		vertical-align: middle;
+		/*vertical-align: middle;*/
 		background-repeat: no-repeat;
 		background-position: center;
 		background-color: rgba(0,0,0,0.07);

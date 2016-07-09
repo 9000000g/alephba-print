@@ -4,13 +4,15 @@
 		<p> فایل خود را در این قسمت انتخاب کنید و یا یک فایل جدید ایجاد کنید. </p>
 	</div>
 	<button class="nai-nav-icon left glyphicon glyphicon-off" ng-click="exit()"></button>
-	<div class="nai-nav-icon left glyphicon glyphicon-folder-open" ng-click="selectFile()"></div>
-	<div class="nai-nav-icon left glyphicon glyphicon-plus" ng-click="newFile()"></div>
+	<button class="nai-nav-icon left glyphicon glyphicon-folder-open" ng-click="selectFile()"></button>
+	<button class="nai-nav-icon left glyphicon glyphicon-plus" ng-click="newFile()"></button>
 </div>
-<div class="nai-page-container col-xs-10 col-xs-offset-1">
-	<ul class="list-group recent-files">
-		<li class="list-group-item col-xs-12 toggle" ng-repeat="item in recentFiles" ng-click="selectFile(item)">
-			<i class="icon glyphicon glyphicon-time"></i> <span class="tahoma"> {{item}} </span> <i class="icon text-danger glyphicon glyphicon-remove pull-right" ng-click="clearFileFromRecent($index)"></i> 
-		</li>
-	</ul>
-</div>
+<label class="col-xs-12 list-group-item text-info" ng-show="recentFiles.length > 0"> فایل‌هایی که در اجراهای قبلی برنامه از آنها استفاده کرده‌اید: </label>	
+<ul class="list-group recent-files">
+	<li class="list-group-item col-xs-12 toggle" ng-repeat="item in recentFiles" ng-click="selectFile(item)">
+		<i class="icon glyphicon glyphicon-time"></i> <span class="tahoma"> {{item}} </span> <i class="icon text-danger glyphicon glyphicon-remove pull-right" ng-click="clearFileFromRecent($index)"></i> 
+	</li>
+</ul>
+
+
+

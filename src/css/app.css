@@ -77,7 +77,7 @@ html, body{
 	float: right;
 }
 .print header > span.logo{
-	width: 25%;
+	width: 20%;
 }
 .print header > span.title{
 	width: 50%;
@@ -86,7 +86,7 @@ html, body{
 }
 .print header > span.codes{
 	width: 25%;
-	margin-top: 60px;
+	margin-top: 66px;
 }
 .print header > span.codes input{
 	display: inline;
@@ -104,13 +104,14 @@ html, body{
 }
 .print .address input.address{
 	margin: 0;
-	width: 46%;
+	width: 34%;
 	text-align: center;
 }
 .print .address input.phone,
-.print .address input.fax{
+.print .address input.fax,
+.print .address input.mobile{
 	margin: 0;
-	width: 25%;
+	width: 20%;
 	text-align: center;
 }
 .print header img{

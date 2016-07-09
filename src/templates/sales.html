@@ -34,7 +34,7 @@
 					<label class="text-primary">هزینه</label>
 				</div>
 				<div class="col-xs-9">
-					{{ item.price_count }} <i>تومان</i>
+					{{ displayPrice( item.price_count) }} <i>ریال</i>
 				</div>
 			</div>
 			<div class="col-xs-12">
@@ -51,7 +51,7 @@
 				<label class="text-primary">محصولات</label>
 			</div>
 			<div class="col-xs-12" ng-repeat="prd in item.products">
-				<span> {{ prd.name }} </span> <span class="text-warning"> {{ prd.cnt }} تا </span> 
+				<span class="pull-right"> {{ prd.name }} </span>: <span class="text-warning"> {{ prd.cnt }} {{ prd.cnt > 1 ? 'تا': 'عدد'}} </span> 
 			</div>
 		</div>
 		<div class="col-xs-1"> <span class="badge">SAL{{ item.id }}</span> </div>

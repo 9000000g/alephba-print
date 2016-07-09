@@ -6,7 +6,7 @@
 	<div class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/main')"></div>
 	<div class="nai-nav-icon left glyphicon glyphicon-plus" ng-click="go('/products/new')"></div>
 </div>
-
+<label class="col-xs-12 list-group-item text-info" ng-show="items.length >= 0"> ارزش کل انبار شما مبلغ <span class="text-danger">{{displayPrice(totalPrice)}}</span> ریال می‌باشد.</label>	
 <ul class="list-group">
 	<li class="list-group-item col-xs-12" ng-repeat="item in items" ng-click="go('/products/{{item.id}}')">
 		<div class="col-xs-11">
@@ -31,7 +31,7 @@
 					<label class="text-primary">موجودی انبار</label>
 				</div>
 				<div class="col-xs-9">
-					{{ item.cnt }} ({{calcPrice(item)}} تومان)
+					{{ item.cnt }} ({{displayPrice(calcPrice(item))}} ریال)
 				</div>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 <div class="nai-navbar">
 	<div class="title">
 		<h2> <i class="icon icon-{{$app.icon}} nai-nav-icon nai-nav-title-icon"></i> پرینت فاکتور {{item.customer_code}}</h2>
-		<p> قسمت‌های "جهت ارائه به" و آدرس‌ها" قابل ویرایش هستند. </p>
+		<p> آدرس‌ها قابل ویرایش هستند. </p>
 	</div>
 	<button class="nai-nav-icon left glyphicon glyphicon-chevron-left" ng-click="go('/sales/'+item.id)"></button>
 	<button class="nai-nav-icon left glyphicon glyphicon-ok" ng-click="submit()"></button>
@@ -17,7 +17,6 @@
 		<span class="codes">
 			<div class="text"><span>کد اقتصادی: 411474936151</div>
 			<div class="text"><span>شماره فاکتور: {{item.code}}</div>
-			<div class="text"><span>جهت ارائه به: <input value="بانک"></div>
 	</span>
 	</header>
 	<div class="col-xs-12"> <br><br><br> </div>
@@ -27,7 +26,7 @@
 		<tr>
 			<td>ردیف</td>
 			<td>شرح کالا</td>
-			<td>کد کالا</td>
+			<td>کد قیمت کالا</td>
 			<td>تعداد</td>
 			<td>قیمت جزء</td>
 			<td>قیمت کل</td>
@@ -35,15 +34,15 @@
 		<tr ng-repeat="product in item.products">
 			<td> {{$index + 1 }} </td>
 			<td> {{product.name}} </td>
-			<td> {{product.id}} </td>
+			<td> {{product.price_code}} </td>
 			<td> {{product.cnt}} </td>
-			<td> {{product.price_value / product.cnt}} تومان </td>	
-			<td> {{product.price_value}} تومان </td>
+			<td> {{displayPrice( product.price_value) }}  ریال </td>	
+			<td> {{displayPrice( product.price_value * product.cnt )}}  ریال </td>
 		</tr>
 		<tr class="last-child">
 			<td colspan="4" class="none"></td>
 			<td> جمع کل </td>
-			<td> {{ item.total_price_value }} تومان </td>
+			<td> {{ displayPrice( item.total_price_value  ) }}  ریال </td>
 		<tr>
 	</table>
 	<div class="col-xs-12"> <br><br> </div>
@@ -51,10 +50,11 @@
 		<div class="col-xs-6">مهر و امضای تحویل گیرنده</div>
 		<div class="col-xs-6">مهر و امضای تحویل دهنده</div>
 	</div>
-	<div class="col-xs-12"> <br><br><br><br><br><br><br><br><br><br> </div>
-	<div class="col-xs-10 col-xs-offset-1 address">
+	<div class="col-xs-12"> <br><br><br><br><br><br><br><br> </div>
+	<div class="col-xs-12 address">
 		<input class="address" value="آدرس: قم، مجتمع ناشران، طبقه زیرهمکف، واحد ۱۰ب">
-		<input class="phone" value="تلفن: ۰۲۵-۳۷۸۴۲۶۰۷">
-		<input class="fax" value="فکس: ۰۲۵-۳۷۸۴۲۶۰۷">
+		<input class="phone" value="تلفن: ۰۲۵۳۷۸۴۲۶۰۷">
+		<input class="fax" value="فکس: ۰۲۵۳۷۸۴۲۶۰۶">
+		<input class="mobile" value="موبایل: ۰۹۱۲۳۵۳۴۷۲۱">
 	</div>
 </div>

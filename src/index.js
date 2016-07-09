@@ -19,7 +19,7 @@ app.on('ready', function() {
 		'node-integration': false
 	});
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');
-	mainWindow.setFullScreen(true);
+	//mainWindow.setFullScreen(true);
 	mainWindow.on('closed', function() {
 		mainWindow = null;
 	});
@@ -104,6 +104,7 @@ io.on('connection', function(socket){
 				db.query().create('products',{
 					'id': 'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
 					'name': 'TEXT',
+					'code': 'TEXT',
 					'price': 'INTEGER',
 					'cnt': 'INTEGER DEFAULT 0',
 					'description': 'TEXT'
@@ -445,21 +446,24 @@ io.on('connection', function(socket){
 				var ret = {};
 				db.query()
 				.select([
-					't2.value AS default_price'
+					't2.id AS id',
+					't2.value AS default_price',
+					't2.code AS code'
 				], 'products t1')
 				.leftJoin('prices t2', 't2.id = t1.price')
 				.where('t1.id = ?', [product])
 				.run( function(result){
 					ret.default_price = result[0].default_price;
+					ret.code = result[0].code;
 					db.query()
 					.select([
 						't2.value AS unique_price'
 					], 'customers t1')
 					.leftJoin('prices_groups t2', 't2.grp = t1.grp')
-					.where('t1.id = ?', [customer])
+					.where('t1.id = ? AND t2.price = ?', [customer, result[0].id])
 					.run( function(result2){
-						ret.unique_price = result2[0].unique_price;
-						callback( ret.unique_price? ret.unique_price: ret.default_price );
+						ret.unique_price = typeof result2[0] != 'undefined'? result2[0].unique_price: null;
+						callback( (ret.unique_price? ret.unique_price: ret.default_price), ret.code );
 					});
 				});
 			}
@@ -478,9 +482,10 @@ io.on('connection', function(socket){
 				.where('t1.sale = ?', [sale.id])
 				.run(function(products){
 					for( var i = 0; i < products.length; i++ ){
-						calcUniquePriceOr( products[i].id, sale.customer, function(value){
+						calcUniquePriceOr( products[i].id, sale.customer, function(value, code){
 							products[i].price_value = value;
-							sale.price_count = value * products[i].cnt;
+							products[i].price_code = code;
+							sale.price_count = value * products[i].cnt;							
 						});
 					}
 					sale.products = products;
@@ -588,10 +593,15 @@ io.on('connection', function(socket){
 	.on('sales-del', function(data, callback){
 		try{
 			db.query()
-			.delete('products')
+			.delete('sales')
 			.where('id = ?', [data.id])
 			.run(function(result){
-				callback(false, result);
+				db.query()
+				.delete('sales_detail')
+				.where('sale = ?', [data.id])
+				.run(function(result2){
+					callback(false, result2);
+				});
 			});
 		}
 		catch(err){
