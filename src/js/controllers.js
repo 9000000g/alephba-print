@@ -1,9 +1,7 @@
 angular.module('app.controllers', [])
 .run(function($rootScope, $location, $server, $app, $customers, $groups, $prices, $products, $sales){
-	$rootScope.$app = $app;
-	$rootScope.loading = false;
-	$rootScope.panels = {};
-	$rootScope.go = function(url){
+	$rootScope.$app = $app; $rootScope.loading = false; 
+	$rootScope.panels = {}; $rootScope.go = function(url){
 		//$rootScope.panels.sidebar = false;
 		if( url == 'back' )
 			$window.history.back();
@@ -13,8 +11,7 @@ angular.module('app.controllers', [])
 	}
 	/* $rootScope.go( '/main' ); */
 
-	$rootScope.alert = alert;
-	$rootScope.exit = function(){
+	$rootScope.alert = alert; $rootScope.exit = function(){
 		$server.emit( 'exit' );
 	}
 	$rootScope.exit = function(){
@@ -265,6 +262,7 @@ angular.module('app.controllers', [])
 		$rootScope.loading = true;
 		$sales.get($routeParams.id, function(item){
 			$scope.item = item;
+			console.log(item);
 			$rootScope.loading = false;
 		});
 	}

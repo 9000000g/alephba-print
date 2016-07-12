@@ -500,9 +500,12 @@ io.on('connection', function(socket){
 				't1.date',
 				't1.customer',
 				't2.name AS customer_name',
-				't2.code AS customer_code'
+				't2.code AS customer_code',
+				't2.grp AS customer_grp',
+				't3.name AS customer_grp_name',
 			], 'sales t1')
 			.leftJoin('customers t2', 't1.customer = t2.id')
+			.leftJoin('groups t3', 't2.grp = t3.id')
 			.where( 't1.id ' + (data.id!==false? ('= '+data.id): '> 0') + (data.search? ' AND (t2.code = \'' + data.search + '\' OR t1.date LIKE \''+ data.search.substr(0,4) + '%\' OR t1.id = \''+ data.search.substr(4) + '\'OR t2.name LIKE \'%'+ data.search + '%\' OR t2.code = \''+ data.search + '\')':''))
 			.run(function(result){
 				result.forEach( function(val,index){

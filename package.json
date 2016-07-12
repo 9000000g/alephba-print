@@ -1,13 +1,13 @@
 {
   "name": "alephba-print",
   "description": "Alephba Print",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "build": {
     "appId": "alephba-print",
     "app-category-type": "none",
     "win": {
       "title": "Alephba Print",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "publisher": "nainemom",
       "icon": "build/icon.ico",
       "iconUrl": "https://github.com/favicon.ico",
