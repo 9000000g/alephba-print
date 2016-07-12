@@ -60,9 +60,7 @@ html, body{
 
 .print{
 	background: #FFF;
-	margin: 30px;
-	padding: 15px;
-	border: dotted 2px #eee;
+	padding: 5px;
 	font-size: 12px;
 	min-width: 900px;
 	overflow: auto;
@@ -78,6 +76,7 @@ html, body{
 }
 .print header > span.logo{
 	width: 20%;
+	text-align: left;
 }
 .print header > span.title{
 	width: 50%;

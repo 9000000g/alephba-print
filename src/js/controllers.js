@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 .run(function($rootScope, $location, $server, $app, $customers, $groups, $prices, $products, $sales){
 	$rootScope.$app = $app;
-
+	$rootScope.loading = false;
 	$rootScope.panels = {};
 	$rootScope.go = function(url){
 		//$rootScope.panels.sidebar = false;
@@ -36,20 +36,25 @@ angular.module('app.controllers', [])
 	}
 
 })
-.controller('MainCtrl', function($scope, $server){
-
+.controller('MainCtrl', function($scope, $server, $rootScope, $timeout){
+	$rootScope.loading = false;
+	
 })
-.controller('CustomersCtrl', function($scope, $timeout, $server, $customers){
+.controller('CustomersCtrl', function($scope, $rootScope, $timeout, $server, $customers){
+	$rootScope.loading = true;
 	$scope.items = [];
 	$customers.reload(function(items){
 		$scope.items = items;
+		$rootScope.loading = false;
 	});
 })
-.controller('CustomerCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $customers, $groups){
+.controller('CustomerCtrl', function($scope, $rootScope, $timeout, $routeParams, $server, $rootScope, $customers, $groups){
+	$rootScope.loading = true;
 	$scope.item = {};
 	if( $routeParams.id != 'new' ){
 		$customers.get($routeParams.id, function(item){
 			$scope.item = item;
+			$rootScope.loading = false;
 		});
 	}
 	$scope.groups = [];
@@ -71,17 +76,21 @@ angular.module('app.controllers', [])
 	}
 })
 
-.controller('GroupsCtrl', function($scope, $timeout, $server, $groups){
+.controller('GroupsCtrl', function($scope, $rootScope, $timeout, $server, $groups){
+	$rootScope.loading = true;
 	$scope.items = [];
 	$groups.reload(function(items){
 		$scope.items = items;
+		$rootScope.loading = false;
 	});
 })
 .controller('GroupCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $groups){
+	$rootScope.loading = true;
 	$scope.item = {};
 	if( $routeParams.id != 'new' ){
 		$groups.get($routeParams.id, function(item){
 			$scope.item = item;
+			$rootScope.loading = false;
 		});
 	}
 
@@ -97,13 +106,16 @@ angular.module('app.controllers', [])
 		});
 	}
 })
-.controller('PricesCtrl', function($scope, $timeout, $server, $prices){
+.controller('PricesCtrl', function($scope, $rootScope, $timeout, $server, $prices){
+	$rootScope.loading = true;
 	$scope.items = [];
 	$prices.reload(function(items){
 		$scope.items = items;
+		$rootScope.loading = false;
 	});
 })
 .controller('PriceCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $prices, $groups){
+	$rootScope.loading = true;
 	$scope.item = {};
 	$scope.groups = [];
 	$groups.reload(function(items){
@@ -132,6 +144,7 @@ angular.module('app.controllers', [])
 						$scope.item.prices[j].grp_name = $scope.groups[i].name;
 					}
 				}
+				$rootScope.loading = false;
 			});
 		}
 		else{
@@ -145,6 +158,7 @@ angular.module('app.controllers', [])
 					value: ''
 				} );
 			}
+			$rootScope.loading = false;
 		}
 	});
 
@@ -161,7 +175,8 @@ angular.module('app.controllers', [])
 		});
 	}
 })
-.controller('ProductsCtrl', function($scope, $timeout, $server, $products){
+.controller('ProductsCtrl', function($scope, $timeout, $rootScope, $server, $products){
+	$rootScope.loading = true;
 	$scope.items = [];
 	$scope.totalPrice = 0;
 	$scope.calcPrice = function(item){
@@ -172,14 +187,17 @@ angular.module('app.controllers', [])
 		for( var i = 0; i < items.length; i++ ){
 			$scope.totalPrice+= $scope.calcPrice( items[i] );
 		}
+		$rootScope.loading = false;
 	});
 })
 .controller('ProductCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $products, $prices){
+	$rootScope.loading = true;
 	$scope.item = {};
 	if( $routeParams.id != 'new' ){
 		$products.get($routeParams.id, function(item){
 			$scope.item = item;
 			$scope.item.cnt = typeof $scope.item.cnt != 'number'? 0: $scope.item.cnt;
+			$rootScope.loading = false;
 		});
 	}
 	else{
@@ -210,7 +228,8 @@ angular.module('app.controllers', [])
 		});
 	}
 })
-.controller('SalesCtrl', function($scope, $timeout, $server, $sales){
+.controller('SalesCtrl', function($scope, $timeout, $server, $sales, $rootScope){
+	$rootScope.loading = true;
 	$scope.items = [];
 	$scope.searchbar = false;
 	$scope.searched = false;
@@ -236,18 +255,16 @@ angular.module('app.controllers', [])
 	}
 	$sales.reload(function(items){
 		$scope.items = items;
-		console.log(items);
+		$rootScope.loading = false;
 	});
 })
 .controller('SaleCtrl', function($scope, $timeout, $routeParams, $server, $rootScope, $sales, $products, $customers){
-
-
+	$rootScope.loading = true;
 	$scope.item = {};
 	if( $routeParams.id != 'new' ){
 		$rootScope.loading = true;
 		$sales.get($routeParams.id, function(item){
 			$scope.item = item;
-			console.log(item);
 			$rootScope.loading = false;
 		});
 	}
@@ -316,6 +333,7 @@ angular.module('app.controllers', [])
 
 })
 .controller('SelectCtrl', function($scope, $rootScope, localStorageService, $server){
+	$rootScope.loading = true;
 	$scope.recentFiles = localStorageService.get('recentFiles');
 	$scope.recentFiles = $scope.recentFiles? $scope.recentFiles: [];
 	$scope.selectedFile = '';
@@ -358,9 +376,10 @@ angular.module('app.controllers', [])
 		$scope.recentFiles.splice( index, 1 );
 		localStorageService.set('recentFiles', $scope.recentFiles);
 	}
-
+	$rootScope.loading = false;
 })
-.controller('ReportPriceCountCtrl', function($scope, $sales){
+.controller('ReportPriceCountCtrl', function($scope, $sales, $rootScope){
+	$rootScope.loading = true;
 	$scope.item = {};
 	$scope.searchResult = {
 		price_count: 0
@@ -385,5 +404,6 @@ angular.module('app.controllers', [])
 				code: items[i].date.substr(0,4) + '' + items[i].id
 			});
 		}
+		$rootScope.loading = false;
 	});
 })

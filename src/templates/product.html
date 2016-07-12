@@ -15,7 +15,7 @@
 	</div>
 	<div class="form-group col-sm-4">
 		<label class="control-label">کد قیمت</label>
-		<select class="form-control" selectize="{valueField:'id',labelField:'code'}" options="prices"  ng-model="item.price"></select>
+		<select class="form-control" selectize="{valueField:'id',labelField:'code', searchField:['code']}" options="prices"  ng-model="item.price"></select>
 	</div>
 	<div class="form-group col-sm-4">
 		<label class="control-label">موجودی انبار ({{ calcPrice(item.price, item.cnt) }}  تومان)</label>

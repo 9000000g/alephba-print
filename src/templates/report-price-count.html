@@ -10,11 +10,11 @@
 <div class="nai-page-container" ng-show="!searched">
 	<div class="form-group col-xs-6">
 		<label class="control-label">از فاکتور</label>
-		<select class="form-control" selectize="{valueField:'id',labelField:'code'}" options="sales"  ng-model="item.from"></select>
+		<select class="form-control" selectize="{valueField:'id',labelField:'code', searchField:['code']}" options="sales"  ng-model="item.from"></select>
 	</div>
 	<div class="form-group col-xs-6">
 		<label class="control-label">تا فاکتور</label>
-		<select class="form-control" selectize="{valueField:'id',labelField:'code'}" options="sales"  ng-model="item.to"></select>
+		<select class="form-control" selectize="{valueField:'id',labelField:'code', searchField:['code']}" options="sales"  ng-model="item.to"></select>
 	</div>
 </div>
 <div class="nai-page-container" ng-show="searched">

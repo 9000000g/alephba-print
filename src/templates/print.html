@@ -19,8 +19,8 @@
 			<div class="text"><span>شماره فاکتور: {{item.code}}</div>
 	</span>
 	</header>
-	<div class="col-xs-12"> <br><br><br> </div>
-	<p class="col-xs-12"> در تاریخ {{item.date}} اقلام ذیل به بانک مهر اقتصاد شعبه <b>{{item.customer_name}} ({{item.customer_code}})</b> تحویل گردید.</p>
+	<div class="col-xs-12"> <br> </div>
+	<p class="col-xs-12"> در تاریخ <span>{{item.date.substr(0,4)}}</span>/<span>{{item.date.substr(5,2)}}</span>/<span>{{item.date.substr(8,2)}}</span> اقلام ذیل به بانک مهر اقتصاد شعبه <b>{{item.customer_name}} ({{item.customer_code}})</b> تحویل گردید.</p>
 	<div class="col-xs-12"> <br><br> </div>
 	<table class="table col-xs-10 col-xs-offset-1">
 		<tr>
@@ -50,7 +50,7 @@
 		<div class="col-xs-6">مهر و امضای تحویل گیرنده</div>
 		<div class="col-xs-6">مهر و امضای تحویل دهنده</div>
 	</div>
-	<div class="col-xs-12"> <br><br><br><br><br><br><br><br> </div>
+	<div class="col-xs-12"> <br><br><br><br><br></div>
 	<div class="col-xs-12 address">
 		<input class="address" value="آدرس: قم، مجتمع ناشران، طبقه زیرهمکف، واحد ۱۰ب">
 		<input class="phone" value="تلفن: ۰۲۵۳۷۸۴۲۶۰۷">

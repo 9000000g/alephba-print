@@ -11,11 +11,10 @@
 <div class="nai-page-container">
 	<div class="form-group col-sm-6">
 		<label class="control-label">مشتری</label>
-		<select class="form-control" selectize="{valueField:'id',labelField:'name'}" options="customers"  ng-model="item.customer"></select>
+		<select class="form-control" selectize="{valueField:'id',labelField:'name', searchField:['name']}" options="customers"  ng-model="item.customer"></select>
 	</div>
 	<div class="form-group col-sm-6">
 		<label class="control-label">تاریخ</label>
-		<!-- <select class="form-control" selectize="{valueField:'id',labelField:'name'}" options="customers"  ng-model="item.customer"></select> -->
 		<input class="form-control" ng-jalaali-flat-datepicker datepicker-config="datepickerConfig" ng-model="item.date">
 	</div>
 	<div class="form-group col-sm-12">
@@ -23,7 +22,7 @@
 		<div class="full-width row col-xs-offset-0">
 			<div class="full-width row" ng-repeat="product in item.products">
 				<div class="col-sm-5">
-					<select class="form-control" selectize="{valueField:'id',labelField:'name'}" options="products"  ng-model="product.id" placeholder="محصول"></select>
+					<select class="form-control" selectize="{valueField:'id',labelField:'name', searchField:['name']}" options="products"  ng-model="product.id" placeholder="محصول"></select>
 				</div>
 				<div class="col-sm-5">
 					<input type="number" class="form-control" ng-model="product.cnt" placeholder="تعداد"/>

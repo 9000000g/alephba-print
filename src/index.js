@@ -481,11 +481,12 @@ io.on('connection', function(socket){
 				//.leftJoin('prices t3', 't2.price = t3.id')
 				.where('t1.sale = ?', [sale.id])
 				.run(function(products){
+					sale.price_count = 0;
 					for( var i = 0; i < products.length; i++ ){
 						calcUniquePriceOr( products[i].id, sale.customer, function(value, code){
 							products[i].price_value = value;
 							products[i].price_code = code;
-							sale.price_count = value * products[i].cnt;							
+							sale.price_count+= value * products[i].cnt;							
 						});
 					}
 					sale.products = products;
