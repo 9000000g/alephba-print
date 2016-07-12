@@ -54,6 +54,10 @@ angular.module('app.controllers', [])
 			$rootScope.loading = false;
 		});
 	}
+	else{
+		$scope.item = {};
+		$rootScope.loading = false;
+	}
 	$scope.groups = [];
 	$groups.reload( function(items){
 		$scope.groups = items;
@@ -90,7 +94,10 @@ angular.module('app.controllers', [])
 			$rootScope.loading = false;
 		});
 	}
-
+	else{
+		$scope.item = {};
+		$rootScope.loading = false;
+	}
 	$scope.id = $routeParams.id;
 	$scope.submit = function(){
 		$groups.set( $scope.item, function(){
@@ -199,6 +206,7 @@ angular.module('app.controllers', [])
 	}
 	else{
 		$scope.item.cnt = typeof $scope.item.cnt != 'number'? 0: $scope.item.cnt;
+		$rootScope.loading = false;
 	}
 	$scope.prices = [];
 	$prices.reload( function(items){
@@ -236,7 +244,7 @@ angular.module('app.controllers', [])
 			$scope.searched = false;
 			$sales.reload(function(items){
 				$scope.items = items;
-				console.log(items);
+				//console.log(items);
 			});
 		}
 		else{
@@ -259,16 +267,16 @@ angular.module('app.controllers', [])
 	$rootScope.loading = true;
 	$scope.item = {};
 	if( $routeParams.id != 'new' ){
-		$rootScope.loading = true;
 		$sales.get($routeParams.id, function(item){
 			$scope.item = item;
-			console.log(item);
+			//console.log(item);
 			$rootScope.loading = false;
 		});
 	}
 	else{
 		$scope.item = {};
 		$scope.item.products = [];
+		$rootScope.loading = false;
 	}
 	$scope.products = [];
 	$products.reload( function(items){
