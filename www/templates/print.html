@@ -45,12 +45,16 @@
 			<td> {{ displayPrice( item.total_price_value  ) }}  ریال </td>
 		<tr>
 	</table>
+	<p class="col-xs-10 col-xs-offset-1 text-center">
+			همچنین مبلغ <span>{{displayPrice( (item.total_price_value / 100) * 10 )}}  ریال</span> به عنوان 10% حق دستمزد در فاکتور فوق منظور گردیده‌است.
+	</p>
 	<div class="col-xs-12"> <br><br> </div>
 	<div class="col-xs-10 col-xs-offset-1 sign">
 		<div class="col-xs-6">مهر و امضای تحویل گیرنده</div>
 		<div class="col-xs-6">مهر و امضای تحویل دهنده</div>
 	</div>
-	<div class="col-xs-12"> <br><br><br><br><br></div>
+
+	<div class="col-xs-12"> <br><br><br><br></div>
 	<div class="col-xs-12 address">
 		<input class="address" value="آدرس: قم، مجتمع ناشران، طبقه زیرهمکف، واحد ۱۰ب">
 		<input class="phone" value="تلفن: ۰۲۵۳۷۸۴۲۶۰۷">

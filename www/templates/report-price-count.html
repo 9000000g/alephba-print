@@ -21,4 +21,9 @@
 	<h2 class="col-xs-12 text-info text-center">
 		{{ displayPrice( searchResult.price_count ) }} ریال
 	</h2>
+	<hr class="col-xs-12"/>
+	<h4 ng-repeat="grp in searchResult.grps" class="col-xs-12 text-info text-center">
+		<b>گروه
+		<span ng-bind="grp.name"> </span>: </b><span> {{ displayPrice(grp.price_count) }} </span> ریال
+	</h4>
 </div>

@@ -1,30 +1,12 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
 var http 				= require('http').createServer().listen(1362);
 var io 					= require('socket.io')(http);
 var db					= false;
-var mainWindow = null;
 
 app.on('window-all-closed', function() {
 	if (process.platform != 'darwin')
 		app.quit();
 });
 
-app.on('ready', function() {
-	mainWindow = new BrowserWindow({
-		resizable: true,
-		center: true,
-		titleBarStyle: 'hidden',
-		autoHideMenuBar: true,
-		'node-integration': false
-	});
-	mainWindow.loadUrl('file://' + __dirname + '/index.html');
-	//mainWindow.setFullScreen(true);
-	mainWindow.on('closed', function() {
-		mainWindow = null;
-	});
-	
-	
 io.on('connection', function(socket){
 	socket.on('exit', function(){
 		if (process.platform != 'darwin')
@@ -36,7 +18,7 @@ io.on('connection', function(socket){
 		try{
 			var file;
 			if( typeof data.file == 'undefined' || !data.file ){
-				var dialog = require('dialog');
+				var dialog = electron.dialog;
 				var selectedFiles = dialog.showOpenDialog({
 					properties: ['openFile'],
 					filters: [
@@ -67,7 +49,7 @@ io.on('connection', function(socket){
 	socket.on('newFile', function(data, callback){
 		try{
 			var file;
-			var dialog = require('dialog');
+			var dialog = electron.dialog;
 			var selectedFiles = dialog.showSaveDialog();
 			if( typeof selectedFiles != 'undefined' && selectedFiles.constructor == String ){
 				file = selectedFiles + '.rdf';
@@ -75,7 +57,7 @@ io.on('connection', function(socket){
 			else{
 				file = false;
 			}
-			
+
 			if( file != false ){
 				db = require('nai-sql').init();
 				db.query().create('customers',{
@@ -266,7 +248,7 @@ io.on('connection', function(socket){
 		try{
 			if( typeof data.id == 'undefined' )
 				data.id = false;
-			
+
 			db.query()
 			.select('*', 'prices')
 			.where( 'id ' + (data.id!==false? ('= '+data.id): 'LIKE "%"') )
@@ -306,9 +288,9 @@ io.on('connection', function(socket){
 					.run( function( result2 ){
 						for( var j = 0; j < prices.length; j++ ){
 							if( typeof prices[j].value != 'number' ) continue;
-							delete prices[j].id; 
-							delete prices[j].grp_name; 
-							delete prices[j].$$hashKey; 
+							delete prices[j].id;
+							delete prices[j].grp_name;
+							delete prices[j].$$hashKey;
 							prices[j].price = result2[0].priceId;
 							db.query()
 							.insert('prices_groups', prices[j])
@@ -316,7 +298,7 @@ io.on('connection', function(socket){
 						}
 						callback(false, result);
 					});
-					
+
 
 				});
 			}
@@ -332,8 +314,8 @@ io.on('connection', function(socket){
 						for( var j = 0; j < prices.length; j++ ){
 							if( typeof prices[j].value != 'number' ) continue;
 							delete prices[j].id;
-							delete prices[j].grp_name; 
-							delete prices[j].$$hashKey; 
+							delete prices[j].grp_name;
+							delete prices[j].$$hashKey;
 							prices[j].price = data.id;
 							db.query()
 							.insert('prices_groups', prices[j])
@@ -442,7 +424,9 @@ io.on('connection', function(socket){
 		try{
 			if( typeof data.id == 'undefined' )
 				data.id = false;
-			var calcUniquePriceOr = function( product, customer, callback ){
+			var calcUniquePriceOr = function( product, customer, callbackz ){
+				if( typeof product =='undefined' || !product) return;
+				console.log(product);
 				var ret = {};
 				db.query()
 				.select([
@@ -463,7 +447,7 @@ io.on('connection', function(socket){
 					.where('t1.id = ? AND t2.price = ?', [customer, result[0].id])
 					.run( function(result2){
 						ret.unique_price = typeof result2[0] != 'undefined'? result2[0].unique_price: null;
-						callback( (ret.unique_price? ret.unique_price: ret.default_price), ret.code );
+						callbackz( (ret.unique_price? ret.unique_price: ret.default_price), ret.code );
 					});
 				});
 			}
@@ -486,7 +470,7 @@ io.on('connection', function(socket){
 						calcUniquePriceOr( products[i].id, sale.customer, function(value, code){
 							products[i].price_value = value;
 							products[i].price_code = code;
-							sale.price_count+= value * products[i].cnt;							
+							sale.price_count+= value * products[i].cnt;
 						});
 					}
 					sale.products = products;
@@ -529,7 +513,7 @@ io.on('connection', function(socket){
 			delete data.price_count;
 			for( var i = 0; i < data.products.length; i++ )
 				delete data.products[i].$$hashKey;
-			
+
 			var setProduct = function( product, minus ){
 				minus = typeof minus == 'undefined'? false: minus;
 				db.query()
@@ -555,7 +539,7 @@ io.on('connection', function(socket){
 						product: products[i].id,
 						cnt: products[i].cnt
 					}, minus );
-			}	
+			}
 			var sale = {
 				customer: data.customer,
 				description: data.description || '',
@@ -613,11 +597,5 @@ io.on('connection', function(socket){
 			callback(true, err);
 		}
 	})
-	
+
 });
-
-	
-});
-
-
-

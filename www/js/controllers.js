@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 .run(function($rootScope, $location, $server, $app, $customers, $groups, $prices, $products, $sales){
-	$rootScope.$app = $app; $rootScope.loading = false; 
+	$rootScope.$app = $app; $rootScope.loading = false;
 	$rootScope.panels = {}; $rootScope.go = function(url){
 		//$rootScope.panels.sidebar = false;
 		if( url == 'back' )
@@ -35,7 +35,7 @@ angular.module('app.controllers', [])
 })
 .controller('MainCtrl', function($scope, $server, $rootScope, $timeout){
 	$rootScope.loading = false;
-	
+
 })
 .controller('CustomersCtrl', function($scope, $rootScope, $timeout, $server, $customers){
 	$rootScope.loading = true;
@@ -388,7 +388,8 @@ angular.module('app.controllers', [])
 	$rootScope.loading = true;
 	$scope.item = {};
 	$scope.searchResult = {
-		price_count: 0
+		price_count: 0,
+		grps: {}
 	};
 	$scope.searched = false;
 	$scope.calc = function(){
@@ -397,6 +398,13 @@ angular.module('app.controllers', [])
 		for( var i = 0; i < $scope.totalSales.length; i++ ){
 			if( $scope.totalSales[i].id >= $scope.item.from && $scope.totalSales[i].id <= $scope.item.to ){
 				$scope.searchResult.price_count+=$scope.totalSales[i].price_count;
+				if( typeof $scope.searchResult.grps[$scope.totalSales[i].customer_grp] == 'undefined' ){
+					$scope.searchResult.grps[$scope.totalSales[i].customer_grp] = {
+						name: $scope.totalSales[i].customer_grp_name,
+						price_count: 0
+					};
+				}
+				$scope.searchResult.grps[$scope.totalSales[i].customer_grp].price_count += $scope.totalSales[i].price_count;
 			}
 		}
 	}
@@ -411,5 +419,6 @@ angular.module('app.controllers', [])
 			});
 		}
 		$rootScope.loading = false;
+		console.log($scope.totalSales);
 	});
 })
