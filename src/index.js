@@ -425,8 +425,11 @@ io.on('connection', function(socket){
 			if( typeof data.id == 'undefined' )
 				data.id = false;
 			var calcUniquePriceOr = function( product, customer, callbackz ){
-				if( typeof product =='undefined' || !product) return;
-				console.log(product);
+				if( typeof product == 'undefined' || !product || product == 'undefined' ) {
+					callbackz( 0, 0 );
+					return;	
+				};
+				//console.log(product);
 				var ret = {};
 				db.query()
 				.select([
@@ -492,6 +495,7 @@ io.on('connection', function(socket){
 			.leftJoin('groups t3', 't2.grp = t3.id')
 			.where( 't1.id ' + (data.id!==false? ('= '+data.id): '> 0') + (data.search? ' AND (t2.code = \'' + data.search + '\' OR t1.date LIKE \''+ data.search.substr(0,4) + '%\' OR t1.id = \''+ data.search.substr(4) + '\'OR t2.name LIKE \'%'+ data.search + '%\' OR t2.code = \''+ data.search + '\')':''))
 			.run(function(result){
+				
 				result.forEach( function(val,index){
 					result[index].products = [];
 					setProducts( result[index] );
@@ -511,8 +515,9 @@ io.on('connection', function(socket){
 			delete data.customer_name;
 			delete data.customer_code;
 			delete data.price_count;
-			for( var i = 0; i < data.products.length; i++ )
+			for( var i = 0; i < data.products.length; i++ ){
 				delete data.products[i].$$hashKey;
+			}
 
 			var setProduct = function( product, minus ){
 				minus = typeof minus == 'undefined'? false: minus;

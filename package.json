@@ -1,5 +1,13 @@
 {
+	"name": "alephba_print",
+	"title": "Alephba Print",
+	"description": "Alephba Print",
+	"version": "1.9.7",
+	"license": "ISC",
+	"author": "nainemom <nainemom@gmail.com>",
+	"main": "main.js",
 	"build": {
+		"asar": false,
 		"productName": "Alephba Print",
 		"mac": {
 			"target": "dmg"

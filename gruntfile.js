@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		exec: {
 			run: {
-				cmd: 'electron ./www',
+				cmd: 'electron .',
 				stdout: true,
 				stderr: true
 			},
