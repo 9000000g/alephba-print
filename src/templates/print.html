@@ -46,7 +46,12 @@
             <td> جمع کل </td>
             <td> {{ displayPrice( item.total_price_value ) }} ریال </td>
             <td> {{ displayPrice( ((item.total_price_value)/100)*9) }} ریال </td>
-            <tr>
+        <tr>
+        <tr class="last-child">
+            <td colspan="4" class="none noned"></td>
+            <td colspan="2"> جمع کل به همراه 9% مالیات ارزش افزوده </td>
+            <td> {{ displayPrice( item.total_price_value+(((item.total_price_value)/100)*9) ) }} ریال </td>
+        <tr>
     </table>
     <p class="col-xs-10 col-xs-offset-1 text-center">
         همچنین مبلغ <span>{{displayPrice( (item.total_price_value / 100) * 15 )}}  ریال</span> به عنوان 15% حق دستمزد در فاکتور فوق منظور گردیده‌است.

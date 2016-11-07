@@ -137,6 +137,9 @@ html, body{
 .print table tr.last-child td:not(.none){
 	border-bottom: solid 1px #000;
 }
+.print table tr.last-child td.noned{
+	border-top: none;
+}
 .print .sign{
 	text-align: right;
 	font-size: 15px;
