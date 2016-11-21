@@ -28,8 +28,7 @@ module.exports = function (grunt) {
 	]);
 	grunt.registerTask("build", [
 		"exec:clean",
-		"exec:build:win:ia32",
-		"exec:build:win:x64"
+		"exec:build:win:ia32"
 	]);
 	grunt.loadNpmTasks('grunt-exec');
 }
