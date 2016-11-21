@@ -2,7 +2,7 @@
 	"name": "alephba_print",
 	"title": "Alephba Print",
 	"description": "Alephba Print",
-	"version": "1.9.8",
+	"version": "1.9.9",
 	"license": "ISC",
 	"author": "nainemom <nainemom@gmail.com>",
 	"main": "main.js",

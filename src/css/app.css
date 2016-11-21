@@ -85,11 +85,10 @@ html, body{
 }
 .print header > span.codes{
 	width: 25%;
-	margin-top: 66px;
+	margin-top: 80px;
 }
 .print header > span.codes input{
 	display: inline;
-	width: auto;
 	margin: -10px;
 	padding-right: 12px;
 	border: none;
@@ -99,20 +98,16 @@ html, body{
 	width: auto;
 }
 .print .address{
-	font-size: 12px;
-}
-.print .address input.address{
-	margin: 0;
-	width: 34%;
+	font-size: 13px;
 	text-align: center;
 }
-.print .address input.phone,
-.print .address input.fax,
-.print .address input.mobile{
-	margin: 0;
-	width: 20%;
-	text-align: center;
+.print .address table{
+	
 }
+.print .address table td{
+	padding: 10px 0;
+}
+
 .print header img{
 	max-width: 158px;
 	min-width: 100px;
